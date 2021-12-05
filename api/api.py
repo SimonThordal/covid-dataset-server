@@ -2,6 +2,14 @@ import hug
 import json
 from pathlib import Path
 import os
+import datetime
+
+# Given a list where the first member is a datestring as "13/04/1983"
+# returns the same list with the first member cast to a datetime
+def parse_date(date: str) -> list:
+    date_format = '%d/%m/%Y'
+    return datetime.strptime(date, date_format)
+
 
 def load_counts(country_code: str) -> list:
     datapath = Path(os.path.abspath(os.path.dirname(__file__))) / "data"
@@ -20,7 +28,7 @@ def hello_world():
 def rolling_five_days(countryterritoryCode: hug.types.text):
     countryterritoryCode = countryterritoryCode.lower()
     data = dict()
-    data['counts'] = load_counts(countryterritoryCode)
+    dates_counts = load_counts(countryterritoryCode)
+    data['counts'] = sort(dates_counts, key=parse_date)[-5:]
     data['country_code'] = countryterritoryCode
-    data['country'] = get_country(countryterritoryCode)
     return data

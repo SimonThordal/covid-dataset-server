@@ -18,7 +18,8 @@ class TestApi(unittest.TestCase):
         self.assertEqual(result.headers_dict['content-type'], 'application/json; charset=utf-8')
         # The response contains data for the given country
         self.assertIn('counts', result.data)
-        self.assertEquals(len(result.data['counts']), 5)
+        counts = result.data['counts']
+        self.assertEquals(len(counts), 5)
         # The response contains the expected keys
         self.assertIn('country_code', result.data)
         self.assertEqual('ESP', result.data['country_code'])
