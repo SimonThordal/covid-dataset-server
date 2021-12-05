@@ -22,7 +22,8 @@ def hello_world():
 
 @hug.get("/rolling-five-days/{countryterritoryCode}")
 def rolling_five_days(countryterritoryCode: hug.types.text):
-    data = dict();
+    countryterritoryCode = countryterritoryCode.lower()
+    data = dict()
     data['counts'] = load_counts(countryterritoryCode)
     data['country_code'] = countryterritoryCode
     data['country'] = get_country(countryterritoryCode)

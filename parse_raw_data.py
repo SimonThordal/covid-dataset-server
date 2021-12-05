@@ -14,5 +14,6 @@ if __name__ == "__main__":
     country_dicts = defaultdict(list)
     [country_dicts[record["countryterritoryCode"]].append(f(record)) for record in data['records']]
     for country, records in country_dicts.items():
+        country = country.lower()
         with open("api/data/" + country + ".json", "w") as fl:
             json.dump(records, fl)
