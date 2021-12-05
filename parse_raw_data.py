@@ -5,7 +5,7 @@ from collections import defaultdict
 
 
 def f(record):
-    return ["date": record['dateRep'], "cases": record['cases']]
+    return [record['dateRep'], record['cases']]
 
 
 if __name__ == "__main__":
