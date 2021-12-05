@@ -11,10 +11,6 @@ def load_counts(country_code: str) -> list:
         return json.load(fl)
 
 
-def get_country(country_code: str) -> str:
-    pass
-
-
 @hug.get("/hello_world")
 def hello_world():
     return "hello world"
