@@ -20,7 +20,5 @@ class TestApi(unittest.TestCase):
         self.assertIn('counts', result.data)
         self.assertGreater(len(result.data['counts']), 0)
         # The response contains the expected keys
-        self.assertIn('country', result.data)
-        self.assertEqual('Spain', result.data['country'])
         self.assertIn('country_code', result.data)
         self.assertEqual('ESP', result.data['country_code'])
