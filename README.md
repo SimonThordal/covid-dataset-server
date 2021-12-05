@@ -26,12 +26,11 @@ For this prototype I am simply storing the data as a JSON file the `data/` folde
 For the rolling endpoint I went with the following response format
 ```
 {
-	country: Spain
 	country_code: ES
 	case_counts: [[DATE_1, COUNT_1], ..., [DATE_5, COUNT_5]]
 }
 ```
-The advantage of the list of tuples is that unlike an object it preserves order, so it can be sorted by date from the backend. I include the country code and name with the response, even though it is specified by the request. This is potentially superfluous, but means the client won't have to keep track of state.
+The advantage of the list of tuples is that unlike an object it preserves order, so it can be sorted by date from the backend. I include the country code with the response, even though it is specified by the request. This is potentially superfluous, but means the client won't have to keep track of state.
 
 ### Keeping the data up to date
 
