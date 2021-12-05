@@ -29,6 +29,6 @@ def rolling_five_days(countryterritoryCode: hug.types.text):
     countryterritoryCode = countryterritoryCode.lower()
     data = dict()
     dates_counts = load_counts(countryterritoryCode)
-    data['counts'] = sort(dates_counts, key=parse_date)[-5:]
+    data['counts'] = sorted(dates_counts, key=parse_date)[-5:]
     data['country_code'] = countryterritoryCode
     return data
