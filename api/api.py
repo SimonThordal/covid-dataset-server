@@ -6,4 +6,4 @@ def hello_world():
 
 @hug.get("/rolling-five-days/{countryterritoryCode}")
 def rolling_five_days():
-	pass
+	return []
