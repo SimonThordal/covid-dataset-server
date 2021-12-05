@@ -19,7 +19,16 @@ class TestApi(unittest.TestCase):
         # The response contains data for the given country
         self.assertIn('counts', result.data)
         counts = result.data['counts']
-        self.assertEquals(len(counts), 5)
+        self.assertEqual(len(counts), 5)
         # The response contains the expected keys
         self.assertIn('country_code', result.data)
-        self.assertEqual('ESP', result.data['country_code'])
+        self.assertEqual('esp', result.data['country_code'])
+
+    def test_totals_endpoint(self):
+        # When getting the totals endpoint
+        result = hug.test.get(api, "/total-data")
+        # The result is an object with country code keys
+        self.assertIn('esp', result.data)
+        # And integer sums
+        [self.assertIsInstance(v, int) for _, v in result.data.items()]
+        
