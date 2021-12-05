@@ -2,13 +2,13 @@ import hug
 import json
 from pathlib import Path
 import os
-import datetime
+from datetime import datetime
 
 # Given a list where the first member is a datestring as "13/04/1983"
 # returns the same list with the first member cast to a datetime
-def parse_date(date: str) -> list:
+def parse_date(date_count: str) -> list:
     date_format = '%d/%m/%Y'
-    return datetime.strptime(date, date_format)
+    return datetime.strptime(date_count[0], date_format)
 
 
 def load_counts(country_code: str) -> list:
