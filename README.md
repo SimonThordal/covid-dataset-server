@@ -4,6 +4,7 @@ The goal of this case is to present a proof of concept for an API that returns a
 
 ### Assumptions
 I am assuming that this is the backend of something that will either stay a microservice, perhaps backing a visualization, or a proof of concept that will be developed into something larger later. 
+I am also assuming that we are only interested in the case data at the moment, not the deaths.
 
 ### Choice of framework
 
