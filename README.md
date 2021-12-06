@@ -1,7 +1,8 @@
-### API showcase
+## API showcase
 
 The goal of this case is to present a proof of concept for an API that returns a [Eurostat Covid dataset](https://www.ecdc.europa.eu/en/publications-data/data-daily-new-cases-covid-19-eueea-country) in two forms — a rolling endpoint that shows the past 5 days of data for a given country code and an endpoint that returns the total count for each country.
 
+## Implementation and considerations
 ### Assumptions
 I am assuming that this is the backend of something that will either stay a microservice, perhaps backing a visualization, or a proof of concept that will be developed into something larger later. 
 I am also assuming that we are only interested in the case data at the moment, not the deaths.
@@ -22,6 +23,7 @@ Since I am assuming that this stays a microservice I do not care much about an e
 ### Storage
 For this prototype I am simply storing the data as JSON files the `data/` folder, one for each country with the country code as name. To avoid having to parse the data on every request I only store the information that is actually needed for API—the dates and the infection count—and I store it in the same way that we want to serve it from the API.
 
+
 ### Output format
 For the rolling endpoint I went with the following response format
 ```
@@ -41,9 +43,13 @@ For the totals endpoint an object with the country code as key and the totals as
 }
 ```
 
+## Future work
+### Implementing a database
+While files work fine for now, additional functionality would quickly result in a complex storage system that would be hard to maintain. As for what database to choose from I would prioritize familiarity over features and go for a SQL database to avoid developers having to learn a new query language.  
+
 ### Keeping the data up to date
 To turn the source data into the lists of lists that I am using `parse_raw_data.py` which grabs the relevant data from `raw_data.json` and places it in the `api/data` folder, ready to be served.
 If we wanted to keep this up to data we could fetch a new version of `raw_data.json` either through the command line or with a script. Running `parse_raw_data.py` again would then update the data served through the API. Both of these could be scheduled using a cronjob to run a couple of times per day.
 
 ### Testing and monitoring
-A bit of testing has already been added using `unittest`, mainly for development purposes. Was this to go live with a continuously updated dataset, then monitoring the source data would be important to avoid that we weren't suddenly missing data or getting data in a format we cannot parse.
+A bit of testing has already been added using `unittest`, mainly for development purposes. Was this to go live with a continuously updated dataset, then monitoring the source data would be important to avoid that we weren't suddenly missing data or getting data in a format we cannot parse. This could be anything from a third party service like [Bugsnag](https://www.bugsnag.com/) or [Papertrail](https://papertrailapp.com/) to email or slack alerts on exceptions.
