@@ -2,6 +2,12 @@
 
 The goal of this case is to present a proof of concept for an API that returns a [Eurostat Covid dataset](https://www.ecdc.europa.eu/en/publications-data/data-daily-new-cases-covid-19-eueea-country) in two forms — a rolling endpoint that shows the past 5 days of data for a given country code and an endpoint that returns the total count for each country.
 
+## Requirements and installation
+You will need Make sure you have Python 3.8 or greater installed along wth `pip` or `pipenv`. To install dependencies run either `pip install -r requirements.txt` or `pipenv install`. You can now start the server using either `hug -f api/api.py` or `pipenv run hug -f api/api.py`.
+
+The server should now be available at [http://localhost:8000](http://localhost:8000) which is also where you will the documentation for the API endpoints.
+
+
 ## Implementation and considerations
 ### Assumptions
 I am assuming that this is the backend of something that will either stay a microservice, perhaps backing a visualization, or a proof of concept that will be developed into something larger later. 
