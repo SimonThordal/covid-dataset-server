@@ -44,6 +44,7 @@ For the totals endpoint an object with the country code as key and the totals as
 ```
 
 ## Future work
+
 ### Implementing a database
 While files work fine for now, additional functionality would quickly result in a complex storage system that would be hard to maintain. As for what database to choose from I would prioritize familiarity over features and go for a SQL database to avoid developers having to learn a new query language.  
 

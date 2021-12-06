@@ -1,4 +1,5 @@
 import hug
+import falcon
 import json
 from pathlib import Path
 from os.path import abspath, dirname, isfile
@@ -31,8 +32,19 @@ def hello_world():
 
 
 @hug.get("/rolling-five-days/{countryterritoryCode}")
-def rolling_five_days(countryterritoryCode: hug.types.text):
+def rolling_five_days(countryterritoryCode: hug.types.text("A 3 letter country code such as ESP"), response=None):
     countryterritoryCode = countryterritoryCode.lower()
+    available_country_codes = get_country_codes_from_files()
+    if countryterritoryCode not in available_country_codes:
+        response.status = falcon.HTTP_500
+        return {
+            'title': 'Country code not available',
+            'status': '500',
+            'detail': 'No data is available for that country code.',
+            'meta': {
+                'available_country_codes': available_country_codes
+            }
+        }
     data = dict()
     dates_counts = load_counts(countryterritoryCode)
     data['counts'] = sorted(dates_counts, key=parse_date)[-5:]
